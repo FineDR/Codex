@@ -22,7 +22,7 @@ SECRET_KEY = 'django-insecure-4jakoa@&^-&shi1(x&%xg9o#7de7^kk#6w_!!nm5(_rld_+b!n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['Codex.onrender.com','ssis-d1204.web.app']
+ALLOWED_HOSTS = ['mpro.onrender.com','ssis-d1204.web.app']
 
 # Application definition
 INSTALLED_APPS = [
