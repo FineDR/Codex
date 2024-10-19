@@ -7,13 +7,14 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY", "default-secret-key")  # Add fallback if not set
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'  # Set to False for production
 
 # Allowed hosts configuration
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+# Use default if not set to avoid errors
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost").split(" ")
 
 # Application definition
 INSTALLED_APPS = [
@@ -61,10 +62,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
-database_url=os.environ.get("DATABASE_URL")
-# Database configuration
+# Database configuration with fallback
+database_url = os.environ.get("DATABASE_URL")
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL', database_url))
+    'default': dj_database_url.parse(database_url or "postgres://user:password@localhost/dbname")
 }
 
 # Password validation
@@ -110,7 +111,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
     "https://ssis-d1204.web.app",
-  "https://myproject-00vc.onrender.com"
+    "https://myproject-00vc.onrender.com"
 ]
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'content-disposition',
@@ -125,7 +126,7 @@ REST_FRAMEWORK = {
     ],
 }
 
-# Add logging configuration to track errors
+# Logging configuration
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -141,6 +142,3 @@ LOGGING = {
         },
     },
 }
-
-# Gunicorn settings (not directly added to Django settings but relevant for deployment)
-# Ensure your Gunicorn command uses the WSGI application defined in WSGI_APPLICATION
