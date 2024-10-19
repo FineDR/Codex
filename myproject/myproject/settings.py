@@ -12,7 +12,11 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-4jakoa@&^-&shi
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'  # Set to False for production
 
 # Allowed hosts configuration
-ALLOWED_HOSTS = ['localhost,myproject-vpft.onrender.com',"https://ssis-d1204.web.app",]
+ALLOWED_HOSTS = [
+    'localhost',
+    'myproject-vpft.onrender.com',
+    'ssis-d1204.web.app',
+]
 
 # Application definition
 INSTALLED_APPS = [
