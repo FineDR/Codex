@@ -112,6 +112,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     "https://ssis-d1204.web.app",
     "https://myproject-00vc.onrender.com"
+    "http://localhost:3000/"
 ]
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'content-disposition',
