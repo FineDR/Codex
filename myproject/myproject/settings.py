@@ -13,8 +13,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "default-secret-key")  # Add fallback 
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'  # Set to False for production
 
 # Allowed hosts configuration
-# Use default if not set to avoid errors
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost").split(" ")
+# Add 'myproject-00vc.onrender.com' to ALLOWED_HOSTS for production
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost myproject-00vc.onrender.com").split(" ")
 
 # Application definition
 INSTALLED_APPS = [
