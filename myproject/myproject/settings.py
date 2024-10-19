@@ -1,22 +1,19 @@
 import os
 from pathlib import Path
 from corsheaders.defaults import default_headers
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-4jakoa@&^-&shi1(x&%xg9o#7de7^kk#6w_!!nm5(_rld_+b!n')
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'  # Set to False for production
 
 # Allowed hosts configuration
-ALLOWED_HOSTS = [
-    'localhost',
-    'myproject-vpft.onrender.com',
-    'ssis-d1204.web.app',
-]
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 # Application definition
 INSTALLED_APPS = [
@@ -64,18 +61,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
+database_url=os.environ.get("DATABASE_URL")
+# Database configuration
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "postgres",  # or your database name
-        "USER": "postgres.yqoixhmtlymgapjtobzn",
-        "PASSWORD": os.environ.get('DB_PASSWORD', 'mlekwa@@123'),
-        "HOST": "aws-0-us-west-1.pooler.supabase.com",
-        "PORT": "6543",
-        "OPTIONS": {
-            'sslmode': 'require',  # Require SSL for the connection
-        }
-    }
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL', database_url))
 }
 
 # Password validation
@@ -154,3 +143,6 @@ LOGGING = {
         },
     },
 }
+
+# Gunicorn settings (not directly added to Django settings but relevant for deployment)
+# Ensure your Gunicorn command uses the WSGI application defined in WSGI_APPLICATION
