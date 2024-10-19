@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-4jakoa@&^-&shi
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'  # Set to False for production
 
 # Allowed hosts configuration
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,myproject-vpft.onrender.com').split(',')
 
 # Application definition
 INSTALLED_APPS = [
