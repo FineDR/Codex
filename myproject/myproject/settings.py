@@ -63,9 +63,23 @@ TEMPLATES = [
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
 # Database configuration with fallback
-database_url = os.environ.get("DATABASE_URL")
+# database_url = os.environ.get("DATABASE_URL")
+# DATABASES = {
+#     'default': dj_database_url.parse(database_url or "postgres://user:password@localhost/dbname")
+# }
+
 DATABASES = {
-    'default': dj_database_url.parse(database_url or "postgres://user:password@localhost/dbname")
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "postgres",  # or your database name
+        "USER": "postgres.yqoixhmtlymgapjtobzn",
+        "PASSWORD": os.environ.get('DB_PASSWORD', 'mlekwa@@123'),
+        "HOST": "aws-0-us-west-1.pooler.supabase.com",
+        "PORT": "6543",
+        "OPTIONS": {
+            'sslmode': 'require',  # Require SSL for the connection
+        }
+    }
 }
 
 # Password validation
